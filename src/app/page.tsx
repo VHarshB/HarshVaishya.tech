@@ -19,36 +19,36 @@ export default function Home() {
       <AnnouncementBanner oldPortfolioUrl="https://your-old-portfolio-link.com" />
 
       {/* Center portrait */}
-      <div className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none translate-y-20">
+      <div className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none translate-y-12 sm:translate-y-16 md:translate-y-20">
         <Image
           src="/images/Harshsnapshot.PNG"
           alt="Harsh portrait"
           width={960}
           height={960}
-          sizes="(max-width: 1200px) 50vw, 960px"
-          className="w-[40vw] max-w-[960px] h-auto drop-shadow-[0_25px_70px_rgba(0,0,0,0.65)]"
+          sizes="(max-width: 640px) 60vw, (max-width: 1024px) 50vw, 40vw"
+          className="w-[60vw] sm:w-[50vw] md:w-[45vw] lg:w-[40vw] max-w-[960px] h-auto drop-shadow-[0_25px_70px_rgba(0,0,0,0.65)]"
           priority
         />
       </div>
 
       {/* Left side name with glitch effect */}
-      <div className="absolute left-8 top-1/2 -translate-y-1/2 z-20">
+      <div className="absolute left-3 sm:left-6 md:left-8 top-1/2 -translate-y-1/2 z-20">
         <div className="relative">
-          <h1 className="text-7xl font-black text-white tracking-tight leading-[0.9] glitch-text">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black text-white tracking-tight leading-[0.9] glitch-text">
             HARSH<br/>VAISHYA
           </h1>
-          <p className="mt-6 text-sm uppercase tracking-[0.3em] text-cyan-200">
+          <p className="mt-3 sm:mt-4 md:mt-6 text-xs sm:text-sm uppercase tracking-[0.2em] sm:tracking-[0.3em] text-cyan-200">
             Student & Lead Developer
           </p>
         </div>
       </div>
 
       {/* Header navigation with circuit borders */}
-      <header className="absolute top-6 right-10 z-20 flex items-center gap-10">
-        <div className="text-sm font-medium tracking-[0.2em] uppercase text-cyan-100 px-3 py-1.5 border border-cyan-400/40 rounded">
+      <header className="absolute top-3 sm:top-4 md:top-6 right-3 sm:right-6 md:right-10 z-20 flex flex-col sm:flex-row items-end sm:items-center gap-2 sm:gap-6 md:gap-10">
+        <div className="text-xs sm:text-sm font-medium tracking-[0.15em] sm:tracking-[0.2em] uppercase text-cyan-100 px-2 sm:px-3 py-1 sm:py-1.5 border border-cyan-400/40 rounded whitespace-nowrap">
           © Code by Harsh
         </div>
-        <nav className="flex items-center gap-1 text-base font-medium tracking-[0.1em] text-white">
+        <nav className="hidden md:flex items-center gap-1 text-base font-medium tracking-[0.1em] text-white">
           {['Home', 'Work', 'About', 'Contact'].map((item) => (
             <button
               key={item}
@@ -61,30 +61,30 @@ export default function Home() {
       </header>
 
       {/* Glass cards on the right with circuit borders */}
-      <div className="absolute top-44 right-8 z-20 flex flex-col gap-5 w-[420px]">
-        <div className="relative rounded-2xl border border-cyan-400/30 bg-black/20 backdrop-blur-md px-8 py-6 text-white shadow-[0_8px_32px_rgba(0,0,0,0.5)] circuit-card">
-          <h2 className="text-sm font-light leading-relaxed tracking-wide">
+      <div className="absolute top-16 sm:top-32 md:top-44 right-2 sm:right-4 md:right-8 z-20 flex flex-col gap-3 sm:gap-4 md:gap-5 w-full sm:w-72 md:w-96 lg:w-[420px] px-2 sm:px-0">
+        <div className="relative rounded-xl sm:rounded-2xl border border-cyan-400/30 bg-black/20 backdrop-blur-md px-4 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6 text-white shadow-[0_8px_32px_rgba(0,0,0,0.5)] circuit-card">
+          <h2 className="text-xs sm:text-sm font-light leading-relaxed tracking-wide">
             BUILDING THE FUTURE,<br/>
-            FUTURE ONE LINE OF CODE<br/>
-            AN ATIME.
+            ONE LINE OF CODE<br/>
+            AT A TIME.
           </h2>
         </div>
 
-        <div className="relative rounded-2xl border border-cyan-400/30 bg-black/20 backdrop-blur-md px-8 py-5 text-white shadow-[0_8px_32px_rgba(0,0,0,0.5)] circuit-card flex items-center justify-between">
+        <div className="relative rounded-xl sm:rounded-2xl border border-cyan-400/30 bg-black/20 backdrop-blur-md px-4 sm:px-6 md:px-8 py-4 sm:py-5 text-white shadow-[0_8px_32px_rgba(0,0,0,0.5)] circuit-card flex items-center justify-between">
           <div>
-            <p className="text-base font-semibold mb-1">ABOUT ME</p>
+            <p className="text-sm sm:text-base font-semibold mb-1">ABOUT ME</p>
           </div>
-          <div className="h-12 w-12 rounded-full bg-gradient-to-br from-amber-500 to-amber-700 overflow-hidden">
+          <div className="h-10 sm:h-12 w-10 sm:w-12 rounded-full bg-gradient-to-br from-amber-500 to-amber-700 overflow-hidden flex-shrink-0">
             <div className="w-full h-full bg-[url('/images/avatar.jpg')] bg-cover bg-center" />
           </div>
         </div>
 
-        <div className="relative rounded-2xl border border-cyan-400/30 bg-black/20 backdrop-blur-md px-8 py-5 text-white shadow-[0_8px_32px_rgba(0,0,0,0.5)] circuit-card flex items-center justify-between">
+        <div className="relative rounded-xl sm:rounded-2xl border border-cyan-400/30 bg-black/20 backdrop-blur-md px-4 sm:px-6 md:px-8 py-4 sm:py-5 text-white shadow-[0_8px_32px_rgba(0,0,0,0.5)] circuit-card flex items-center justify-between">
           <div>
-            <p className="text-base font-semibold mb-1">MY WORK</p>
+            <p className="text-sm sm:text-base font-semibold mb-1">MY WORK</p>
           </div>
-          <div className="h-12 w-12 rounded-lg border border-cyan-400/50 bg-cyan-400/10 backdrop-blur flex items-center justify-center">
-            <svg className="w-6 h-6 text-cyan-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <div className="h-10 sm:h-12 w-10 sm:w-12 rounded-lg border border-cyan-400/50 bg-cyan-400/10 backdrop-blur flex items-center justify-center flex-shrink-0">
+            <svg className="w-5 sm:w-6 h-5 sm:h-6 text-cyan-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
             </svg>
           </div>
@@ -92,8 +92,8 @@ export default function Home() {
       </div>
 
       {/* View Projects button */}
-      <div className="absolute left-8 bottom-20 z-20">
-        <button className="px-8 py-3 bg-cyan-500/70 hover:bg-cyan-500/90 text-white font-medium tracking-wider rounded-lg transition-all backdrop-blur-sm border border-cyan-400/50">
+      <div className="absolute left-3 sm:left-6 md:left-8 bottom-10 sm:bottom-14 md:bottom-20 z-20">
+        <button className="px-5 sm:px-6 md:px-8 py-2 sm:py-2.5 md:py-3 bg-cyan-500/70 hover:bg-cyan-500/90 text-white text-sm sm:text-base font-medium tracking-wider rounded-lg transition-all backdrop-blur-sm border border-cyan-400/50 whitespace-nowrap">
           VIEW PROJECTS
         </button>
       </div>
@@ -103,6 +103,12 @@ export default function Home() {
           position: relative;
           text-shadow: 2px 2px 0 rgba(34, 211, 238, 0.4), -2px -2px 0 rgba(236, 72, 153, 0.4);
           animation: glitch-skew 3s infinite;
+        }
+        
+        @media (max-width: 640px) {
+          .glitch-text {
+            animation: glitch-skew 4s infinite;
+          }
         }
         
         .glitch-text::before,
