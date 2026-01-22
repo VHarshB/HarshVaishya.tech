@@ -1,13 +1,16 @@
 
 'use client';
 import Image from 'next/image';
+import { useState } from 'react';
 import ParticleNetwork from '@/components/ParticleNetwork';
 import AnnouncementBanner from '@/components/AnnouncementBanner';
 
 export default function Home() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   return (
     <div 
-      className="relative w-full min-h-screen overflow-hidden"
+      className="relative w-full md:w-full h-screen md:min-h-screen overflow-hidden"
       style={{
         backgroundImage: 'url(/images/BGimage.jpg)',
         backgroundSize: 'cover',
@@ -18,15 +21,71 @@ export default function Home() {
       <ParticleNetwork />
       <AnnouncementBanner oldPortfolioUrl="https://your-old-portfolio-link.com" />
 
-      {/* Center portrait */}
-      <div className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none translate-y-12 sm:translate-y-16 md:translate-y-20">
+      {/* Mobile Hamburger Menu - Only visible on mobile */}
+      <button
+        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        className="md:hidden fixed top-4 left-4 z-50 flex flex-col gap-1.5 bg-black/40 backdrop-blur p-2 rounded border border-cyan-400/30"
+        aria-label="Toggle menu"
+      >
+        <div className={`w-6 h-0.5 bg-cyan-300 transition-all duration-300 ${isMobileMenuOpen ? 'rotate-45 translate-y-2' : ''}`}></div>
+        <div className={`w-6 h-0.5 bg-cyan-300 transition-all duration-300 ${isMobileMenuOpen ? 'opacity-0' : ''}`}></div>
+        <div className={`w-6 h-0.5 bg-cyan-300 transition-all duration-300 ${isMobileMenuOpen ? '-rotate-45 -translate-y-2' : ''}`}></div>
+      </button>
+
+      {/* Mobile Sidebar Menu */}
+      <div
+        className={`fixed left-0 top-0 h-screen w-64 bg-gradient-to-br from-cyan-900/50 to-blue-900/50 backdrop-blur-lg border-r border-cyan-400/30 z-40 transition-transform duration-300 ease-in-out md:hidden overflow-y-auto ${
+          isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
+        }`}
+      >
+        <nav className="flex flex-col gap-4 pt-20 px-6 pb-8">
+          {/* Tagline Card */}
+          <div className="rounded-lg border border-cyan-400/30 bg-black/30 backdrop-blur-md px-4 py-4 text-white shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
+            <h2 className="text-xs font-light leading-relaxed tracking-wide">
+              BUILDING THE FUTURE,<br/>
+              ONE LINE OF CODE<br/>
+              AT A TIME.
+            </h2>
+          </div>
+
+          <hr className="border-cyan-400/20" />
+
+          {/* Navigation Items with icons */}
+          {[
+            { label: 'Home', icon: '' },
+            { label: 'About Me', icon: '' },
+            { label: 'My Work', icon: '' },
+            { label: 'Contact', icon: '' },
+          ].map((item) => (
+            <button
+              key={item.label}
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="flex items-center gap-3 px-4 py-3 text-white text-sm font-medium rounded-lg border border-cyan-400/30 bg-black/20 hover:bg-cyan-500/20 hover:border-cyan-400/60 transition-all"
+            >
+              <span className="text-lg">{item.icon}</span>
+              <span>{item.label}</span>
+            </button>
+          ))}
+        </nav>
+      </div>
+
+      {/* Mobile menu overlay */}
+      {isMobileMenuOpen && (
+        <div
+          className="fixed inset-0 bg-black/40 z-30 md:hidden"
+          onClick={() => setIsMobileMenuOpen(false)}
+        ></div>
+      )}
+
+      <ParticleNetwork />
+      <div className="absolute inset-0 z-10 flex items-center justify-center sm:justify-center md:justify-center pointer-events-none translate-y-12 sm:translate-y-16 md:translate-y-20 sm:translate-x-0 md:translate-x-0 translate-x-16">
         <Image
           src="/images/Harshsnapshot.PNG"
           alt="Harsh portrait"
           width={960}
           height={960}
-          sizes="(max-width: 640px) 60vw, (max-width: 1024px) 50vw, 40vw"
-          className="w-[60vw] sm:w-[50vw] md:w-[45vw] lg:w-[40vw] max-w-[960px] h-auto drop-shadow-[0_25px_70px_rgba(0,0,0,0.65)]"
+          sizes="(max-width: 640px) 95vw, (max-width: 1024px) 50vw, 40vw"
+          className="w-[95vw] sm:w-[50vw] md:w-[45vw] lg:w-[40vw] max-w-[960px] h-auto drop-shadow-[0_25px_70px_rgba(0,0,0,0.65)]"
           priority
         />
       </div>
@@ -60,8 +119,8 @@ export default function Home() {
         </nav>
       </header>
 
-      {/* Glass cards on the right with circuit borders */}
-      <div className="absolute top-16 sm:top-32 md:top-44 right-2 sm:right-4 md:right-8 z-20 flex flex-col gap-3 sm:gap-4 md:gap-5 w-full sm:w-72 md:w-96 lg:w-[420px] px-2 sm:px-0">
+      {/* Glass cards on the right with circuit borders - Hidden on mobile */}
+      <div className="hidden md:flex absolute top-16 sm:top-32 md:top-44 right-2 sm:right-4 md:right-8 z-20 flex-col gap-3 sm:gap-4 md:gap-5 w-full sm:w-72 md:w-96 lg:w-[420px] px-2 sm:px-0">
         <div className="relative rounded-xl sm:rounded-2xl border border-cyan-400/30 bg-black/20 backdrop-blur-md px-4 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6 text-white shadow-[0_8px_32px_rgba(0,0,0,0.5)] circuit-card">
           <h2 className="text-xs sm:text-sm font-light leading-relaxed tracking-wide">
             BUILDING THE FUTURE,<br/>
