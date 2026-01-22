@@ -10,7 +10,7 @@ export default function Home() {
 
   return (
     <div 
-      className="relative w-full md:w-full h-[80vh] md:min-h-screen overflow-hidden"
+      className="relative w-full md:w-full h-[95vh] md:min-h-screen overflow-hidden"
       style={{
         backgroundImage: 'url(/images/BGimage.jpg)',
         backgroundSize: 'cover',
