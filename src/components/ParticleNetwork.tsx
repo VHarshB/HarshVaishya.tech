@@ -44,17 +44,20 @@ const CircuitAnimation: React.FC = () => {
       cyan: 0x75B3C2,
       green: 0x6092B3,
       blue: 0x1D3A46,
-      teal: 0x5B383D,
-      purple: 0x8B5CF6
+      teal: 0x23294a,
+      purple: 0x5f264a
     };
 
     // Create circuit paths
     const paths: { points: THREE.Vector3[], color: number, progress: number, speed: number }[] = [];
 
+    // Check if mobile
+    const isMobile = window.innerWidth < 768;
+
     // Generate multiple circuit paths
     for (let i = 0; i < 25; i++) {
-      // Bias all circuits toward the right side of the viewport
-      const startX = 30 + rng() * 60; // range: [30, 90]
+      // Bias circuits toward the right on desktop, more centered on mobile
+      const startX = isMobile ? (-10 + rng() * 50) : (30 + rng() * 60); // mobile: [-10, 40], desktop: [30, 90]
       const startY = (rng() - 0.5) * 50;
       const points: THREE.Vector3[] = [];
       

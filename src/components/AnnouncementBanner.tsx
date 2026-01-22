@@ -41,6 +41,36 @@ const AnnouncementBanner: React.FC<AnnouncementBannerProps> = ({
     setIsDragging(false);
   };
 
+  // Touch event handlers for mobile
+  const handleTouchStart = (e: React.TouchEvent) => {
+    // Don't drag when touching the close button or links
+    if ((e.target as HTMLElement).closest('button, a')) return;
+    
+    setIsDragging(true);
+    if (dragRef.current) {
+      const rect = dragRef.current.getBoundingClientRect();
+      const touch = e.touches[0];
+      setDragOffset({
+        x: touch.clientX - rect.left,
+        y: touch.clientY - rect.top,
+      });
+    }
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isDragging) return;
+    
+    const touch = e.touches[0];
+    setPosition({
+      x: touch.clientX - dragOffset.x,
+      y: touch.clientY - dragOffset.y,
+    });
+  };
+
+  const handleTouchEnd = () => {
+    setIsDragging(false);
+  };
+
   if (!isVisible) return null;
 
   return (
@@ -50,6 +80,9 @@ const AnnouncementBanner: React.FC<AnnouncementBannerProps> = ({
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
       onMouseLeave={handleMouseUp}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
       style={{
         position: 'fixed',
         left: `${position.x}px`,
