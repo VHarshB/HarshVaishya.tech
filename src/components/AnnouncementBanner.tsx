@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 
 interface AnnouncementBannerProps {
   oldPortfolioUrl?: string;
@@ -9,12 +9,58 @@ const AnnouncementBanner: React.FC<AnnouncementBannerProps> = ({
   oldPortfolioUrl = "#" 
 }) => {
   const [isVisible, setIsVisible] = useState(true);
+  const [isDragging, setIsDragging] = useState(false);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
+  const dragRef = useRef<HTMLDivElement>(null);
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    // Don't drag when clicking the close button or links
+    if ((e.target as HTMLElement).closest('button, a')) return;
+    
+    setIsDragging(true);
+    if (dragRef.current) {
+      const rect = dragRef.current.getBoundingClientRect();
+      setDragOffset({
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top,
+      });
+    }
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging) return;
+    
+    setPosition({
+      x: e.clientX - dragOffset.x,
+      y: e.clientY - dragOffset.y,
+    });
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
 
   if (!isVisible) return null;
 
   return (
-    <div className="fixed bottom-8 right-8 z-30 max-w-md animate-fade-in">
-      <div className="relative rounded-xl border border-amber-400/50 bg-gradient-to-br from-amber-900/40 to-orange-900/30 backdrop-blur-lg px-6 py-5 text-white shadow-[0_8px_32px_rgba(0,0,0,0.8)] circuit-card">
+    <div 
+      ref={dragRef}
+      onMouseDown={handleMouseDown}
+      onMouseMove={handleMouseMove}
+      onMouseUp={handleMouseUp}
+      onMouseLeave={handleMouseUp}
+      style={{
+        position: 'fixed',
+        left: `${position.x}px`,
+        top: `${position.y}px`,
+        right: 'auto',
+        bottom: 'auto',
+        zIndex: 30,
+      }}
+      className="max-w-md cursor-grab active:cursor-grabbing"
+    >
+      <div className="relative rounded-xl border border-amber-400/50 bg-gradient-to-br from-amber-900/40 to-orange-900/30 backdrop-blur-lg px-6 py-5 text-white shadow-[0_8px_32px_rgba(0,0,0,0.8)] circuit-card pointer-events-auto">
         {/* Close button */}
         <button
           onClick={() => setIsVisible(false)}
