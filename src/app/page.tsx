@@ -21,7 +21,7 @@ export default function Home() {
       {/* Center portrait */}
       <div className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none translate-y-20">
         <Image
-          src="/images/harshsnapshot.png"
+          src="/images/Harshsnapshot.PNG"
           alt="Harsh portrait"
           width={960}
           height={960}
