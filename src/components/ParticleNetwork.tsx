@@ -57,7 +57,7 @@ const CircuitAnimation: React.FC = () => {
     // Generate multiple circuit paths
     for (let i = 0; i < 25; i++) {
       // Bias circuits toward the right on desktop, more centered on mobile
-      const startX = isMobile ? (-10 + rng() * 50) : (30 + rng() * 60); // mobile: [-10, 40], desktop: [30, 90]
+      const startX = isMobile ? (-10 + rng() * 50) : (50 + rng() * 60); // mobile: [-10, 40], desktop: [50, 110]
       const startY = (rng() - 0.5) * 50;
       const points: THREE.Vector3[] = [];
       
