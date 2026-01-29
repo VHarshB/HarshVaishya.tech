@@ -118,7 +118,8 @@ const CircuitAnimation: React.FC = () => {
       animatedLines.push({ line: animLine, path });
     });
 
-    // Add connection nodes
+    // Add connection nodes at circuit path junction points
+    // These nodes represent connection points along the circuit paths
     const nodeGeometry = new THREE.CircleGeometry(0.3, 16);
     paths.forEach(path => {
       path.points.forEach((point, idx) => {
